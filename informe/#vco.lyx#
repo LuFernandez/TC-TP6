@@ -93,7 +93,19 @@ hay dos tipos de vcos:
  waveform and provides a wide range of operational frequencies.
  The output frequency depends on the time of charging and discharging of
  the capacitor.
- 
+ }con vcgap=7 (3.5-(-3.5))
+\end_layout
+
+\begin_layout Standard
+me da b= 0.05556
+\end_layout
+
+\begin_layout Standard
+rc=1.587.10^-5 DEAHI, SI R E 10K, C ME DA 1.587nF
+\end_layout
+
+\begin_layout Standard
+
 \end_layout
 
 \end_body
