@@ -1,0 +1,110 @@
+Circuit: * C:\Users\lugfe\Documents\GitHub\TC-TP6\vco\vco.asc
+
+Early termination of direct N-R iteration.
+Direct Newton iteration failed to find .op point.  (Use ".option noopiter" to skip.)
+Starting Gmin stepping
+Gmin = 10
+vernier = 0.5
+vernier = 0.25
+vernier = 0.125
+Gmin = 5.5165
+vernier = 0.0625
+vernier = 0.03125
+vernier = 0.015625
+vernier = 0.0078125
+Gmin = 5.48432
+vernier = 0.00390625
+vernier = 0.00195313
+vernier = 0.000976563
+vernier = 0.000488281
+Gmin = 0
+Gmin stepping failed
+
+Starting source stepping with srcstepmethod=0
+Source Step = 3.0303%
+Source Step = 5.33854%
+Source Step = 5.45691%
+Source Step = 5.57528%
+Source Step = 5.69366%
+Source Step = 5.81203%
+vernier = 0.00585938
+Source Step = 5.94223%
+Source Step = 6.11979%
+Source Step = 6.29735%
+Source Step = 6.47491%
+Source Step = 6.65246%
+vernier = 0.00878906
+Source Step = 6.8389%
+Source Step = 7.10523%
+Source Step = 7.37157%
+Source Step = 7.6379%
+Source Step = 7.90424%
+Source Step = 8.17057%
+vernier = 0.0131836
+Source Step = 8.57008%
+Source Step = 8.96958%
+Source Step = 9.36908%
+Source Step = 9.76858%
+Source Step = 10.1681%
+vernier = 0.0197754
+Source Step = 10.7474%
+Source Step = 11.3466%
+Source Step = 11.9459%
+Source Step = 12.5451%
+Source Step = 13.1444%
+vernier = 0.0296631
+Source Step = 13.9833%
+Source Step = 14.8822%
+Source Step = 15.7811%
+Source Step = 16.68%
+Source Step = 17.5789%
+vernier = 0.0444946
+Source Step = 18.7924%
+Source Step = 20.1407%
+Source Step = 21.489%
+Source Step = 22.8373%
+Source Step = 24.1856%
+vernier = 0.0667419
+Source Step = 25.9385%
+Source Step = 27.9609%
+Source Step = 29.9834%
+Source Step = 32.0059%
+Source Step = 34.0284%
+vernier = 0.100113
+Source Step = 36.5565%
+Source Step = 39.5902%
+Source Step = 42.6239%
+Source Step = 45.6577%
+Source Step = 48.6914%
+vernier = 0.150169
+Source Step = 52.3319%
+Source Step = 56.8825%
+Source Step = 61.433%
+Source Step = 65.9836%
+Source Step = 70.5342%
+vernier = 0.225254
+Source Step = 75.7674%
+Source Step = 82.5933%
+Source Step = 89.4192%
+Source Step = 96.245%
+Source stepping succeeded in finding the operating point.
+
+
+Date: Mon Nov 05 01:21:34 2018
+Total elapsed time: 2.150 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 14869
+traniter = 11191
+tranpoints = 3735
+accept = 2805
+rejected = 930
+matrix size = 116
+fillins = 826
+solver = Normal
+Thread vector: 13.4/8.7[2] 4.7/4.2[2] 5.8/4.0[2] 1.1/2.1[1]  2592/500
+Matrix Compiler1: 109.07 KB object code size  29.1/17.0/[6.1]
+Matrix Compiler2: 24.57 KB object code size  8.0/4.6/[2.9]
+
