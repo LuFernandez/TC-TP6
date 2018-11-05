@@ -75,24 +75,8 @@
 
 \begin_body
 
-\begin_layout Standard
-\begin_inset CommandInset include
-LatexCommand input
-filename "caratula.lyx"
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset CommandInset include
-LatexCommand input
-filename "vco.lyx"
-
-\end_inset
-
-
+\begin_layout Section
+Oscilador Controlado por Tensión
 \end_layout
 
 \end_body

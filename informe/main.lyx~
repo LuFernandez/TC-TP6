@@ -85,15 +85,5 @@ filename "caratula.lyx"
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset CommandInset include
-LatexCommand input
-filename "vco.lyx"
-
-\end_inset
-
-
-\end_layout
-
 \end_body
 \end_document
