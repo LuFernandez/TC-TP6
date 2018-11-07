@@ -93,7 +93,63 @@ hay dos tipos de vcos:
  waveform and provides a wide range of operational frequencies.
  The output frequency depends on the time of charging and discharging of
  the capacitor.
- 
+ }con vcgap=7 (3.5-(-3.5))
+\end_layout
+
+\begin_layout Standard
+me da b= 0.05556
+\end_layout
+
+\begin_layout Standard
+rc=1.587.10^-5 DEAHI, SI R E 10K, C ME DA 1.587nF
+\end_layout
+
+\begin_layout Standard
+digo
+\end_layout
+
+\begin_layout Standard
+Vin = 4CRVGAP f + b
+\end_layout
+
+\begin_layout Standard
+quiero
+\end_layout
+
+\begin_layout Standard
+0=4*1k*VgapCR+b
+\end_layout
+
+\begin_layout Standard
+5=4*10k*VgapCR+b
+\end_layout
+
+\begin_layout Standard
+vgap es 3.75V*2
+\end_layout
+
+\begin_layout Standard
+CR=1.85.10ala-5
+\end_layout
+
+\begin_layout Standard
+b=-0.555556
+\end_layout
+
+\begin_layout Standard
+http://sam.atlantes.org/vco.html
+\end_layout
+
+\begin_layout Standard
+:
+\end_layout
+
+\begin_layout Standard
+Tal y como está implementado, la salida en diente de sierra se toma de la
+ entrada no inversora del amplificador operacional (Aunque en el circuito
+ no se indica por motivos de claridad, es preciso bufferear la salida para
+ evitar que la carga del condensador deje de ser linear (p.e., poner un A.O.
+ de ganancia unidad a la salida de diente de sierra)).
 \end_layout
 
 \end_body

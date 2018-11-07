@@ -79,5 +79,22 @@
 Oscilador Controlado por Tensión
 \end_layout
 
+\begin_layout Standard
+hay dos tipos de vcos:
+\end_layout
+
+\begin_layout Standard
+-osciladores harmonicos: la salida es sinusoidal.Examples are crystal oscillators
+ and tank oscillators.
+\end_layout
+
+\begin_layout Standard
+-Relaxation Oscillators: The output is a signal with saw tooth or triangular
+ waveform and provides a wide range of operational frequencies.
+ The output frequency depends on the time of charging and discharging of
+ the capacitor.
+ 
+\end_layout
+
 \end_body
 \end_document
