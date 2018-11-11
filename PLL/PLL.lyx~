@@ -837,9 +837,65 @@ Por otro lado, si en cambio se utiliza un filtro RC luego del comparador
 \end_layout
 
 \begin_layout Standard
-HABLAR SOBRE COMO PUEDE MODIFICAR EL RANGO DE CAPTURA; PLANTEAR TRANSFERENCIAS;
- HABLAR DEL RRC; DECIR QUE PEERMITE CAMBIOS MENOS CAMBIO DE FASE Y MAYOR
- CONTROL SOBRE LAS VARIABLES POR AGREGAR OTRA RESISTENCIA.
+Al implementar, en cambio, un filtro R-R-C (como el que se muestra en la
+ siguiente figura) también se obtiene una respuesta de segundo orden pero
+ con la ventaja de que se logra independizar el Q del filtro y la posición
+ de los polos debido a que existen una variable más a determinar.
+ Otra ventaja es que se genera un cero el cual produce menor cambio de fase.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename filtroRC.PNG
+	scale 50
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename filtroRRC.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Filtro RC y R-R-C
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En cuanto al ancho de banda del filtro, este determina el rango de captura
+ del PLL.
+ En general se tiene que al disminuir el ancho de banda del filtro aumenta
+ el amortiguamiento de la respuesta (no es deseable), disminuye el rango
+ de captura (puede ser deseable según la aplicación), se rechaza mejor el
+ ruido que se introduce a las señales del lazo (característica deseable)
+ y además disminuye el overshoot de la respuesta del filtro (altamente deseable).
 \end_layout
 
 \begin_layout Subsection
@@ -1032,6 +1088,127 @@ Respuesta en Frecuencia y Respuesta al Escalón - con RRC
 
 \end_inset
 
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Para exhibir el rango de captura y de enganche del PLL se procedió a HABLAR
+ DE COMO SE PONEN LOS GENERADORES Y TODO ESOOOOO
+\end_layout
+
+\begin_layout Standard
+Los resultados se presentan a continuación:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Mediciones Rango de Enganche y Captura
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Además, se verificó la demodulación de FM ingresando al PLL con una DECIR
+ LAS CARACTERISTICAS DE LA SEÑAL Y DECIR EL FILTRO QUE SE USÓ.
+\end_layout
+
+\begin_layout Standard
+A continuación se expone una imagen tomada del osciloscopio que presenta
+ a la señal modulada y su correspondiente demodulada tomada a la entrada
+ del VCO:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Demodulación de FM
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Por último, se interconectó la salida del VCO con la entrada del comparador
+ de fase mediante un divisor de módulo 16 y se midió la señal generada por
+ el VCO, ante una señal de entrada al PLL cuya frecuencia era de DECIR LA
+ FRECUENCIAAAAA.
+ La imagen obtenida del osciloscopio es la siguiente:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Multiplicación de Frecuencia
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 
 \end_layout
 

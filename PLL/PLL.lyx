@@ -767,7 +767,7 @@ Así, y teniendo en cuenta que
 \end_layout
 
 \begin_layout Subsection
-Filtro Pasa Bajos RANGO DE CAPTURAAA???
+Filtro Pasa Bajos
 \end_layout
 
 \begin_layout Standard
@@ -837,9 +837,65 @@ Por otro lado, si en cambio se utiliza un filtro RC luego del comparador
 \end_layout
 
 \begin_layout Standard
-HABLAR SOBRE COMO PUEDE MODIFICAR EL RANGO DE CAPTURA; PLANTEAR TRANSFERENCIAS;
- HABLAR DEL RRC; DECIR QUE PEERMITE CAMBIOS MENOS CAMBIO DE FASE Y MAYOR
- CONTROL SOBRE LAS VARIABLES POR AGREGAR OTRA RESISTENCIA.
+Al implementar, en cambio, un filtro R-R-C (como el que se muestra en la
+ siguiente figura) también se obtiene una respuesta de segundo orden pero
+ con la ventaja de que se logra independizar el Q del filtro y la posición
+ de los polos debido a que existen una variable más a determinar.
+ Otra ventaja es que se genera un cero el cual produce menor cambio de fase.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename filtroRC.PNG
+	scale 50
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename filtroRRC.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Filtro RC y R-R-C
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En cuanto al ancho de banda del filtro, este determina el rango de captura
+ del PLL.
+ En general se tiene que al disminuir el ancho de banda del filtro aumenta
+ el amortiguamiento de la respuesta (no es deseable), disminuye el rango
+ de captura (puede ser deseable según la aplicación), se rechaza mejor el
+ ruido que se introduce a las señales del lazo (característica deseable)
+ y además disminuye el overshoot de la respuesta del filtro (altamente deseable).
 \end_layout
 
 \begin_layout Subsection
