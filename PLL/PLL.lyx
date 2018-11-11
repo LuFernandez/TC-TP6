@@ -1,0 +1,1173 @@
+#LyX 2.2 created this file. For more info see http://www.lyx.org/
+\lyxformat 508
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Part
+Teoría de Circuitos - TP 6
+\end_layout
+
+\begin_layout Section
+Phase Locked Loop (PLL)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Quotes eld
+\end_inset
+
+Phased Locked Loop
+\begin_inset Quotes erd
+\end_inset
+
+ hace referencia a un circuito con lazo de fijación de fase que es capaz
+ de generar una oscilación cuya fase con respecto a una señal de entrada
+ se mantiene constante.
+ Para esto, el lazo cuenta con una realimentación que compara la fase de
+ dos señales y actúa modificando la frecuencia de la oscilación generada.
+ A continuación se presenta un diagrama del lazo mencionado:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Diagrama de Lazo PLL
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El lazo expuesto es capaz de mantener la condición de equilibrio (
+\begin_inset Formula $f_{in}=f_{o})$
+\end_inset
+
+ siempre y cuando 
+\begin_inset Formula $"f_{in}"$
+\end_inset
+
+ se encuentre en un rango adecuado llamado 
+\begin_inset Quotes eld
+\end_inset
+
+rango de enganche
+\begin_inset Quotes erd
+\end_inset
+
+ y , aún más, si la frecuencia de entrada se aparta de este rango la frecuencia
+ 
+\begin_inset Formula $"f_{o}"$
+\end_inset
+
+ sollo volverá a 
+\begin_inset Quotes eld
+\end_inset
+
+seguir
+\begin_inset Quotes erd
+\end_inset
+
+ a 
+\begin_inset Formula $f_{in}$
+\end_inset
+
+ cuando esta última ingrese en un rango llamado 
+\begin_inset Quotes eld
+\end_inset
+
+rango de captura
+\begin_inset Quotes erd
+\end_inset
+
+.
+ A lo sumo, el rango de captura es igual al rango de enganche, pero generalement
+e es menor a este último.
+\end_layout
+
+\begin_layout Standard
+A grandes rasgos se puede decir que el lazo 
+\begin_inset Quotes eld
+\end_inset
+
+enganchado
+\begin_inset Quotes erd
+\end_inset
+
+ por fase sincroniza dos señales, a pesar del ruido eléctrico o de las variacion
+es de frecuencia de la señal de entrada.
+\end_layout
+
+\begin_layout Standard
+A continuación se analizarán las distintas partes del lazo para mejor comprensió
+n del funcionamiento del mismo y también se abordarán algunas aplicaciones
+ de este circuito.
+ Por último, se implementará un PLL con el integrado 
+\begin_inset Quotes eld
+\end_inset
+
+CD4046
+\begin_inset Quotes erd
+\end_inset
+
+ y se realizarán mediciones del mismo.
+\end_layout
+
+\begin_layout Subsection
+Comparador de Fase
+\end_layout
+
+\begin_layout Standard
+El comparador de fase (o detector de fase) cumple el rol de generar una
+ tensión 
+\begin_inset Formula $"V_{D}"$
+\end_inset
+
+ en función de la diferencia de fase entre la señal de entrada y la de realiment
+ación.
+ Existen diversos tipos de implementaciones, y algunos de ellos se describirán
+ a continuación.
+\end_layout
+
+\begin_layout Subsubsection
+Comparador de Fase Tipo I (XOR)
+\end_layout
+
+\begin_layout Standard
+Una manera de implementar el comparador de fase es con una compuerta lógica
+ XOR (la cual puede poseer entradas 
+\begin_inset Quotes eld
+\end_inset
+
+Schmidt Trigger
+\begin_inset Quotes erd
+\end_inset
+
+ para señales analógicas).
+ A continuación se expone un diagrama a modo de ejemplo de las entradas
+ y salida de este comparador:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename xorDiagramaSeñales.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Formas de Señales Típicas del Comparador XOR
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Luego, el duty cycle (
+\begin_inset Formula $"DC"$
+\end_inset
+
+)de la salida de la compuerta XOR es utilizado para generar una señal 
+\begin_inset Formula $"V_{D}"$
+\end_inset
+
+ de continua según la siguiente expresión:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $V_{D}=DC.V_{DD}$
+\end_inset
+
+, siendo 
+\begin_inset Formula $"V_{DD}"$
+\end_inset
+
+ la tensión de alimentación.
+\end_layout
+
+\begin_layout Standard
+Dicho esto, se puede notar que al variar el desfasaje entre las dos señales
+ de entrada a la compuerta XOR se producirá un cambio en el dutycycle y
+ luego a la salida del comparador se producirá una variación de tensión.
+ Por lo tanto, al realizar un gráfico de la tensión de salida del comparador
+ en función del desfasaje de señales se obtiene lo siguiente:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename comp1VdVSfase.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Salida del Comparador Según Desfasaje
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A partir de este gráfico se puede calcular la sensibilidad de la tensión
+ de salida con respecto al desfasaje (representada por la pendiente) la
+ cual resulta ser 
+\begin_inset Formula $S_{\phi}^{V_{D}}=\frac{V_{DD}}{\pi}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Por último, vale aclarar que para obtener un rango de enganche óptimo al
+ utilizar este comparador es necesario que las señales de entradas a la
+ compuerta XOR tengan un duty cycle de 50% de manera que el duty cycle de
+ la salida pueda variar entre 0% y 100%.
+\end_layout
+
+\begin_layout Subsubsection
+Comparador de Fase Tipo II (Edge Detector)
+\end_layout
+
+\begin_layout Standard
+Otro tipo de comparador de fase se puede implementar mediante el siguiente
+ circuito:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename comp2circuito.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Comparador con Flip Flops
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Del esquema se puede notar que la señal 
+\begin_inset Formula $"UP"$
+\end_inset
+
+ y 
+\begin_inset Formula $"DN"$
+\end_inset
+
+ no pueden mantenerse en alto simultáneamente (despreciando los glitches
+ que pueden ocasionarse) debido a la compuerta AND (cuya salida se encuentra
+ conectada a los resets de los flip flops).
+ En cuanto a los flip flops 
+\begin_inset Quotes eld
+\end_inset
+
+D
+\begin_inset Quotes erd
+\end_inset
+
+, estos imponen un 
+\begin_inset Quotes eld
+\end_inset
+
+1
+\begin_inset Quotes erd
+\end_inset
+
+ lógico a su salida al llegar un flanco (de 
+\begin_inset Formula $v_{1}$
+\end_inset
+
+o 
+\begin_inset Formula $v_{o}$
+\end_inset
+
+, según sea el flip flop de UP o DN), y a su vez se activan los transistores
+ MOSFET.
+ Si se activa solo el transistor de UP, se produce una carga del capacitor
+ mediante las resistencias, mientras que se produce una descarga al activarse
+ el transistor de DN.
+\end_layout
+
+\begin_layout Standard
+Luego, teniendo en cuenta que las señales 
+\begin_inset Formula $v_{1}$
+\end_inset
+
+ y 
+\begin_inset Formula $v_{0}$
+\end_inset
+
+ son periódicas pero pueden diferir en frecuencia y fase, el capacitor se
+ cargará y se descargará con la misma constante de tiempo.
+ Sin embargo, entre cada carga y descarga también existirá un estado de
+ alta impedancia a la salida del circuito debido a que existirá un transitorio
+ en el cual los MOSFET no estarán activados.
+ En este estado el capacitor actúa como una memoria analógica que se utilizará
+ para controlar el oscilador que genere la señal de 
+\begin_inset Formula $v_{o}$
+\end_inset
+
+.
+ De hecho, la base fundamental del PLL es que el valor de esta memoria corrija
+ la frecuencia 
+\begin_inset Formula $f_{o}$
+\end_inset
+
+ de manera que se iguale a 
+\begin_inset Formula $f_{in}$
+\end_inset
+
+ y se produzca un estado de equilibrio, para el cual el comparador de fase
+ presenta alta impedancia a la salida.
+\end_layout
+
+\begin_layout Subsubsection
+Comparador de Tipo III (Multiplicador)
+\end_layout
+
+\begin_layout Standard
+Un tercer tipo de comparador se basa en un multiplicador modulador balanceado
+ y un filtro pasabajos que elimine la componente cuya frecuencia resulte
+ de la suma de las frecuencias de las señales de entrada.
+ Por ende, a la salida se obtendrá la componente de señal de menor frecuencia
+ (
+\begin_inset Formula $f_{in}-f_{o}$
+\end_inset
+
+) .
+ Si esta salida se utiliza de manera que se corrija la señal de entrada
+ de 
+\begin_inset Formula $f_{o}$
+\end_inset
+
+ produciendo que esta se acerque en frecuencia a 
+\begin_inset Formula $f_{in}$
+\end_inset
+
+ finalmente se obtendría a la salida una señal constante que dependa de
+ la diferencia de fase constante resultante.
+ A continuación se presenta un esquema que describe lo mencionado:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename comp3diagrama.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Diagrama de Comparador Multiplicador
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Voltage Controlled Oscilator (VCO)
+\end_layout
+
+\begin_layout Standard
+El oscilador controlado por voltage ya es explicado en otra sección del
+ artículo, sin embargo es importante aclarar que este oscilador es crucial
+ para el funcionamiento del PLL ya que su función es generar la señal de
+ realimentación y corregir la misma según lo indique el comparador de fase
+ del lazo del PLL.
+ Además las capacidades de este oscilador controlado por tensión definen
+ el rango de enganche proporcionará el circuito y también la frecuencia
+ a la que oscilará el mismo al no encontrarse el PLL en el estado de 
+\begin_inset Quotes eld
+\end_inset
+
+enganche
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Vale aclarar que a esta última se la suele llamar 
+\begin_inset Quotes eld
+\end_inset
+
+frecuencia de carrera libre
+\begin_inset Quotes erd
+\end_inset
+
+ o 
+\begin_inset Quotes eld
+\end_inset
+
+frecuencia natural
+\begin_inset Quotes erd
+\end_inset
+
+, ya que es a la frecuencia que oscilará el VCO al ingresar al PLL un señal
+ cuya frecuencia no es la estipulada según el rango de enganche o captura.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename vcoDiagrama.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Diagrama de Bloque de VCO
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Transferencia - Análisis Teórico
+\end_layout
+
+\begin_layout Standard
+Ante la señal de entrada del PLL, pueden existir varias señales consideradas
+ como salidas ya que se puede medir la señal en cualquiera de los puntos
+ intermedios del lazo.
+ Sin embargo, para poner en evidencia el seguimiento de frecuencia que se
+ realiza en el lazo se puede plantear la transferencia de la fase de la
+ señal de entrada con respecto a la fase de la señal de realimentación,
+ es decir, de la salida del VCO.
+ Para esto, es conveniente realizar un análisis en el dominio de Laplace
+ de manera que 
+\begin_inset Formula $H(s)=\frac{\phi_{VCO}}{\phi_{in}}$
+\end_inset
+
+.
+ A fin de afrontar este cálculo, a continuación se presenta un diagrama
+ que expone los efectos en frecuencia (o fase) que produce cada componente
+ del lazo:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename diagramaTransferencia.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Diagrama de Transferencia - Dominio de Laplace
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En este diagrama, 
+\begin_inset Formula $K_{\phi}$
+\end_inset
+
+ es la sensibilidad de la señal de salida del comparador según la fase,
+ 
+\begin_inset Formula $F(s)$
+\end_inset
+
+ representa un filtro pasabajos utilizada para filtrar componentes armónicos
+ y generar, idealmente, una señal continua para la entrada del VCO, y finalmente
+ el bloque integrador luego de la ganancia 
+\begin_inset Formula $K_{vco}$
+\end_inset
+
+ del oscilador controlado por tensión hace referencia a la relación entre
+ fase y frecuencia angular.
+ Es decir, como 
+\begin_inset Formula $w(t)=\frac{d\phi}{dt}\Rightarrow\phi(t)=\intop w(t).dt$
+\end_inset
+
+ lo que en el dominio de Laplace equivale a 
+\begin_inset Formula $\phi_{VCO}(s)=\frac{w_{VCO}(s)}{s}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Por lo tanto, 
+\begin_inset Formula $\frac{\phi_{VCO}}{\phi_{in}}=\frac{G(s)}{1+G(s)}$
+\end_inset
+
+ con 
+\begin_inset Formula $G(s)=\frac{K_{\phi}.F(s).K_{VCO}}{s}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Aún más, dado que el teorema del valor final se establece que 
+\begin_inset Formula $lím_{t\rightarrow\infty}f(t)=lím_{R(s)\rightarrow0}s.T(s)$
+\end_inset
+
+, siendo 
+\begin_inset Formula $T(s)=\mathcal{L}\{f(t).u(t)\}$
+\end_inset
+
+, se puede plantar la siguiente igualdad:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $lím_{t\rightarrow\infty}\phi_{VCO}(t)=lím_{R(s)\rightarrow0}s.\frac{1}{s}.\phi_{VCO}(s)=lím_{R(s)\rightarrow0}\frac{G(s)}{1+G(s)}.\phi_{in}(s)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Así, y teniendo en cuenta que 
+\begin_inset Formula $F(s)$
+\end_inset
+
+ es la transferencia de un pasa bajos que no presenta un cero en el origen,
+ se llega a que 
+\begin_inset Formula $lím_{t\rightarrow\infty}\phi_{VCO}(t)\thickapprox\phi_{in}(t)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Filtro Pasa Bajos RANGO DE CAPTURAAA???
+\end_layout
+
+\begin_layout Standard
+El lazo del PLL se diseña con un filtro pasa bajos luego del comparador
+ de fase para atenuar los armónicos en frecuencia y obtener, idealmente,
+ una señal continua.
+ Se suelen utilizar filtros RC para obtener una transferencia 
+\begin_inset Formula $F(s)$
+\end_inset
+
+ de primer orden pero también se puede obviar el RC, es decir que se puede
+ implementar el PLL con 
+\begin_inset Formula $F(s)=1$
+\end_inset
+
+ debido a que el integrador de VCO ya genera rechazo de altas frecuencias.
+ Aún más, si se plantea la transferencia 
+\begin_inset Formula $H_{o}(s)=\frac{V_{o}(s)}{w_{in}(s)}$
+\end_inset
+
+ (siguiendo la nomenclatura del diagrama expuesto en la sección anterior)
+ con 
+\begin_inset Formula $F(s)=1$
+\end_inset
+
+ se tiene que 
+\begin_inset Formula $\frac{V_{o}(s)}{w_{in}(s)}=\frac{\frac{1}{K_{VCO}}}{1+\frac{s}{K_{\phi}}}$
+\end_inset
+
+.
+ De aquí se puede observar el rechazo de altas frecuencias pero además se
+ puede notar en el dominio del tiempo que ante una variación de 
+\begin_inset Formula $w_{in}$
+\end_inset
+
+ de forma senoidal (esto se puede dar, por ejemplo, en una señal modulada
+ por frecuencia) también se produce un cambio senoidal en la tensión 
+\begin_inset Formula $V_{o}$
+\end_inset
+
+ que ingresa al VCO.
+ Esto quiere decir que con el PLL es posible demodular una señal de FM.
+\end_layout
+
+\begin_layout Standard
+Por otro lado, si en cambio se utiliza un filtro RC luego del comparador
+ de fase, se obtiene que 
+\begin_inset Formula $F(s)=\frac{1}{\frac{s}{w_{p}+1}}$
+\end_inset
+
+ con 
+\begin_inset Formula $w_{p}=\frac{1}{RC}$
+\end_inset
+
+.
+ Esto, en conjunto con el integrador del VCO, se traduce en una respuesta
+ de segundo orden del PLL cuyo tiempo de estableciemiento y overshoot estan
+ gobernados por el valor de R y C, la sensibilidad 
+\begin_inset Formula $K_{\phi}$
+\end_inset
+
+ y la ganancia 
+\begin_inset Formula $K_{VCO}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+HABLAR SOBRE COMO PUEDE MODIFICAR EL RANGO DE CAPTURA; PLANTEAR TRANSFERENCIAS;
+ HABLAR DEL RRC; DECIR QUE PEERMITE CAMBIOS MENOS CAMBIO DE FASE Y MAYOR
+ CONTROL SOBRE LAS VARIABLES POR AGREGAR OTRA RESISTENCIA.
+\end_layout
+
+\begin_layout Subsection
+Implementación con CD4046
+\end_layout
+
+\begin_layout Standard
+Para implementar un PLL se utilizará el integrado 
+\begin_inset Quotes eld
+\end_inset
+
+CD4046
+\begin_inset Quotes erd
+\end_inset
+
+, el cual incorpora las componentes de lazo que se han mencionado anteriormente.
+ Para poder lograr el PLL, al integrado se deben agregar 2 resistencias
+ y un capacitor (R1, R2 y C1) para configurar el rango de enganche determinado
+ por el VCO y además se puede añadir el filtro pasabajos (R3, C2 para el
+ RC y R3, R4, C2 para el RRC) antes de la entrada del VCO.
+ A continuación se presenta un diagrama de bloques del integrado extraído
+ de su hoja de datos:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename diagramacd4046.PNG
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Diagrama Extraído de Hoja de Datos - CD4046
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Del diagrama se puede notar que el integrado posee un pin para obtener una
+ señal demodulada de FM, el cual no es más que la entrada del VCO pero dispuesta
+ de tal manera que la medición de la demodulación no afecte el funcionamiento
+ del PLL (como si tuviera un buffer).
+\end_layout
+
+\begin_layout Standard
+Además, entre la entrada del comparador de fase y la salida de VCO se puede
+ observar en el diagrama un divisor de modulo 
+\begin_inset Quotes eld
+\end_inset
+
+N
+\begin_inset Quotes erd
+\end_inset
+
+ y esto es para utilizar el PLL como multiplicador (o sintetizador) de frecuenci
+as.
+ Esto es posible ya que el PLL 
+\begin_inset Quotes eld
+\end_inset
+
+sigue
+\begin_inset Quotes erd
+\end_inset
+
+ (se sincroniza) a la señal de entrada, por ende, al introducir un divisor
+ se puede obtener a la salida del VCO una señal de frecuencia N veces la
+ frecuencia de entrada.
+\end_layout
+
+\begin_layout Standard
+Dicho esto, se propone realizar un PLL con un rango de enganche entre 
+\begin_inset Formula $7.5KHz$
+\end_inset
+
+ y 
+\begin_inset Formula $100KHz$
+\end_inset
+
+.
+ Dadas estas especificaciones y según la hoja de datos del integrado se
+ utilizaron los siguientes valores de componentes:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula $\begin{cases}
+R1=4.7K\Omega & C1=3.3nF\\
+R2=100K\Omega & C2=1nF\\
+R3=250K\Omega & R4=50K\Omega
+\end{cases}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Mediciones
+\end_layout
+
+\begin_layout Standard
+Al momento de realizar mediciones, como primera medida se procedió a medir
+ de forma directa la respuesta en frecuencia del circuito, es decir PONER
+ LA TRANSFERENCIAAAAA, y además se midió su respuesta al escalón.
+ Esto se repitió para los tres tipos de filtros (sin filtro, RC, RRC) y
+ se obtuvo lo siguiente:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Respuesta en Frecuencia y Respuesta al Escalón - sin Filtro
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Respuesta en Frecuencia y Respuesta al Escalón - con RC
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Respuesta en Frecuencia y Respuesta al Escalón - con RRC
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Para exhibir el rango de captura y de enganche del PLL se procedió a HABLAR
+ DE COMO SE PONEN LOS GENERADORES Y TODO ESOOOOO
+\end_layout
+
+\begin_layout Standard
+Los resultados se presentan a continuación:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Mediciones Rango de Enganche y Captura
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Además, se verificó la demodulación de FM ingresando al PLL con una DECIR
+ LAS CARACTERISTICAS DE LA SEÑAL Y DECIR EL FILTRO QUE SE USÓ.
+\end_layout
+
+\begin_layout Standard
+A continuación se expone una imagen tomada del osciloscopio que presenta
+ a la señal modulada y su correspondiente demodulada tomada a la entrada
+ del VCO:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Demodulación de FM
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Por último, se interconectó la salida del VCO con la entrada del comparador
+ de fase mediante un divisor de módulo 16 y se midió la señal generada por
+ el VCO, ante una señal de entrada al PLL cuya frecuencia era de DECIR LA
+ FRECUENCIAAAAA.
+ La imagen obtenida del osciloscopio es la siguiente:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Multiplicación de Frecuencia
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Análisis de Resultados
+\end_layout
+
+\begin_layout Subsection
+Conclusión
+\end_layout
+
+\end_body
+\end_document
