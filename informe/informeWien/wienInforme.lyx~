@@ -3410,7 +3410,7 @@ Segundo Armónico
 \begin_layout Standard
 Con las cuales de puede calcular el THD medido de manera que se pueda comparar
  con el simulado.
- El cálculo, utilizando nuevamente la formula de THD presentada anteoriormente:
+ El cálculo, utilizando nuevamente la formula de THD presentada anteriormente:
 \end_layout
 
 \begin_layout Standard
@@ -3431,6 +3431,18 @@ Lo cual resulta ser mejor que el simulado, probablemente causado por los
 
 \begin_layout Subsection
 Conclusiones
+\end_layout
+
+\begin_layout Standard
+En conclusión, se pudo implementar físicamente con éxito el oscilador de
+ Wien.
+ Es notable destacar las simpleza y eficiencia del sistema.
+ el cual puede proporcionar una senoidal con un THD muy bajo sin muchas
+ complicaciones.
+ Es mas, colocando potenciómetros se puede diseñar un oscilador con una
+ frecuencia de señal y amplitud variable, mientras esta no se de alta frecuencia
+, por las complicaciones que implican al Slew-Rate y al polo dominante de
+ Op-Amp como se discutió anteriormente.
 \end_layout
 
 \end_body
