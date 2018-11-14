@@ -548,6 +548,327 @@ El problema con el circuito básico es que en el la practica se tienen dos
  explica en la siguiente sección.
 \end_layout
 
+\begin_layout Standard
+Por lo que a lazo cerrado, la ganancia del sistema es:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+H(j\omega)=\frac{A(j\omega)}{1-A(j\omega)B(j\omega)}=\frac{3}{1-\frac{3}{3+j(\frac{\omega}{\omega_{o}}-\frac{\omega_{o}}{\omega})}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+H(s)=3\cdotp\frac{(\frac{s}{\omega_{o}})^{2}+3\frac{s}{\omega_{o}}+1}{(\frac{s}{\omega_{o}})^{2}+1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+H(j\omega_{o})\longrightarrow\infty
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se graficó en MATLAB la función transferencia correspondiente a lazo cerrado,
+ con 
+\begin_inset Formula $\omega_{o}=2\pi\cdotp f_{o}=2\pi\cdotp67.5k$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename imagenesWien/Figure_1b.png
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bode Magnitud
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename imagenesWien/Figure_2b.png
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bode Fase
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Y el diagrama de polos y ceros es el siguiente:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename imagenesWien/Figure_3b.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Diagrama polos y ceros
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Para lazo abierto, la transferencia es la calculada anteriormente, 
+\begin_inset Formula $\beta(s)$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\beta(s)=\frac{sCR}{(sCR)^{2}+3CRs+1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+y como 
+\begin_inset Formula $\omega_{o}=\frac{1}{CR}$
+\end_inset
+
+, entonces:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\beta(s)=\frac{(\frac{s}{\omega_{o}})}{(\frac{s}{\omega_{o}})^{2}+\frac{3s}{\omega_{o}}+1}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se graficó en MATLAB la función transferencia correspondiente a lazo abierto,
+ con 
+\begin_inset Formula $\omega_{o}=2\pi\cdotp f_{o}=2\pi\cdotp67.5k$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename imagenesWien/Figure_1.png
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bode Magnitud
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename imagenesWien/Figure_2.png
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bode Fase
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Y el diagrama de polos y ceros es el siguiente:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename imagenesWien/Figure_3.png
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Diagrama polos y ceros
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Funcionamiento de elementos alineales
 \end_layout
@@ -685,6 +1006,58 @@ Por lo que de esta manera el sistema va a hallar un punto de equilibrio
 .
  Los diodos, entonces, son los responsables de que se llegue a el equilibrio
  en una tensión dada.
+ Se puede ver como agregando un diodo zener en serie con el anterior, la
+ amplitud de la señal aumenta:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename imagenesWien/Screenshot 2018-11-12 19.46.00.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Amplitud con dos Zener
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se puede apreciar como la tensión pico aumenta de aproximadamente 
+\begin_inset Formula $V_{p}\approx6v$
+\end_inset
+
+ (ver sección de simulaciones) a 
+\begin_inset Formula $V_{p}\approx8.25v$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -692,15 +1065,106 @@ Curvas del FET
 \end_layout
 
 \begin_layout Standard
-TERMINAR!!!
-\end_layout
-
-\begin_layout Subsection
-Singularidades
+Se simularon las curvas del FET utilizando el siguiente circuito:
 \end_layout
 
 \begin_layout Standard
-TERMINAR!!!
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename imagenesWien/Screenshot 2018-11-12 14.55.06.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Circuito para medición de curvas
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La relación entre 
+\begin_inset Formula $V_{DS}$
+\end_inset
+
+ y 
+\begin_inset Formula $I_{D}$
+\end_inset
+
+ resultó ser la siguiente:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename imagenesWien/Screenshot 2018-11-12 14.54.38.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Curvas simuladas del FET
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Para el oscilador de Wien se uso el transistor en su zona Ohmica, donde
+ se puede variar la resistencia drain-source mediante la tensión en el gate.
+ Si se quiere modificar el circuito de manera que funcione para un transistor
+ de canal P, se tiene que tener en cuenta que la tensión ahora que controla
+ la resistencia drain-source debe ser positiva.
+ Esto se puede resolver cambiando la dirección de los diodos, de manera
+ que solo sobrevivan los hemiciclos positivos.
 \end_layout
 
 \begin_layout Subsection
@@ -2393,6 +2857,41 @@ Por lo que cuando se implemento en PCB, estos fueron los valores iniciales
  la salida deseada.
 \end_layout
 
+\begin_layout Standard
+Con la FFT se puede calcular la THD simulada, esta se calcula como:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+THD=\frac{\sum_{n=0}^{N}P_{n}}{P_{0}}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Donde reemplazando los valores en veces de los primeros tres armónicos,
+ ya que a partir del cuarto son despreciables (
+\begin_inset Formula $P_{4}\approx1.58\cdotp10^{-4}W$
+\end_inset
+
+), y del armónico fundamental, se obtiene:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+THD=\frac{0.0177+3.98\cdotp10^{-4}+6.31\cdotp10^{-4}}{17.78}\approx0.001
+\]
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Tensión en el Gate
 \end_layout
@@ -2464,7 +2963,7 @@ Se puede ver como al aumentar la resistencia, el valor de la tensión en
 \begin_inset Formula $-3.2V$
 \end_inset
 
-, debido a que EXPLICAR!!!
+.
 \end_layout
 
 \begin_layout Standard
@@ -2594,7 +3093,61 @@ Respuesta al escalón (encendido de la fuente)
 \end_layout
 
 \begin_layout Standard
-MEDIR!!!
+En osciloscopio se observó el encendido de la fuente:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename imagenesWien/scope_12.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Encendido de la fuente
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se puede ver que el tiempo de establecimiento de la señal es de aproximadamente
+ 
+\begin_inset Formula $4ms$
+\end_inset
+
+, siendo este cuando la señal ya tiene una amplitud constante y se asemeja
+ a una senoidal sin distorsión alguna.
+ También se midió que el pico máximo en el transitorio es de 
+\begin_inset Formula $V_{p}=7.25V$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsubsection
@@ -2602,7 +3155,54 @@ Tensión en el Gate
 \end_layout
 
 \begin_layout Standard
-MEDIR!!!
+La tensión en el gate medida es la siguiente:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename imagenesWien/scope_8.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Tensión en el gate
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Lo cual concuerda muy bien con la teoría, la cual predecía una tensión en
+ el gate de 
+\begin_inset Formula $V_{G}=-3.2V$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsubsection
@@ -2657,7 +3257,7 @@ Como se puede ver, la senal tiene aproximadamente
 \begin_inset Formula $67.5kHz$
 \end_inset
 
- como se calculo, y una tensión pico a pico de 
+ como se calculó, y una tensión pico a pico de 
 \begin_inset Formula $10.88V$
 \end_inset
 
@@ -2669,8 +3269,17 @@ Rango de Vcc
 \end_layout
 
 \begin_layout Standard
-Se vario experimentalmente la alimentación, y se encontró que el sistema
- oscilaba para el rango MEDIR!!!.
+Se varió experimentalmente la alimentación, y se encontró que el sistema
+ oscilaba para el rango de 
+\begin_inset Formula $|V_{cc}|\epsilon$
+\end_inset
+
+
+\begin_inset Formula $[7V,18V]$
+\end_inset
+
+, aunque se observó que al reducir la alimentación, aumentó la frecuencia
+ de la oscilación.
 \end_layout
 
 \begin_layout Subsubsection
@@ -2679,7 +3288,7 @@ THD
 
 \begin_layout Standard
 Se usó el modo FFT del osciloscopio para observar la THD.
- La medición es la siguiente:
+ Las mediciones son las siguientes:
 \end_layout
 
 \begin_layout Standard
@@ -2692,8 +3301,8 @@ status collapsed
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename imagenesWien/scope_17.png
-	scale 70
+	filename imagenesWien/scope_19.png
+	scale 50
 
 \end_inset
 
@@ -2704,7 +3313,7 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Medicion de FFT
+Armónico Fundamental
 \end_layout
 
 \end_inset
@@ -2719,19 +3328,6 @@ Medicion de FFT
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-Se puede observar el pico principal, al cual corresponde a la frecuencia
- fundamental (
-\begin_inset Formula $f_{o}$
-\end_inset
-
-).
- Se puede observar un segundo pico el cual no se ve completamente resuelto
- ya que el RBW no permite la diferenciación total de estos dos picos.
- El resto de los picos se corresponden a el ruido del osciloscopio.
- Esto se puede apreciar si comparamos esta FFT con la FFT sin señal:
 \end_layout
 
 \begin_layout Standard
@@ -2744,8 +3340,8 @@ status collapsed
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename imagenesWien/scope_16.png
-	scale 70
+	filename imagenesWien/scope_23.png
+	scale 50
 
 \end_inset
 
@@ -2756,7 +3352,7 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Piso de ruido en la FFT
+Primer Armónico
 \end_layout
 
 \end_inset
@@ -2771,10 +3367,82 @@ Piso de ruido en la FFT
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename imagenesWien/scope_24.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Segundo Armónico
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Con las cuales de puede calcular el THD medido de manera que se pueda comparar
+ con el simulado.
+ El cálculo, utilizando nuevamente la formula de THD presentada anteriormente:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+THD=\frac{0.0107+2.05\cdotp10^{-4}}{16.55}\approx0.0007
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Lo cual resulta ser mejor que el simulado, probablemente causado por los
+ errores en el calculo de la FFT echos por el osciloscopio.
 \end_layout
 
 \begin_layout Subsection
 Conclusiones
+\end_layout
+
+\begin_layout Standard
+En conclusión, se pudo implementar físicamente con éxito el oscilador de
+ Wien.
+ Es notable destacar las simpleza y eficiencia del sistema, el cual puede
+ proporcionar una senoidal con un THD muy bajo sin muchas complicaciones.
+ Es más, colocando potenciómetros se puede diseñar un oscilador con una
+ frecuencia de señal y amplitud variable, mientras esta no se de alta frecuencia
+, por las complicaciones que implican al Slew-Rate y al polo dominante de
+ Op-Amp como se discutió anteriormente.
 \end_layout
 
 \end_body
