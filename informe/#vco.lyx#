@@ -919,18 +919,565 @@ Por último, para la tercera etapa, o sea, la transformación de triangular
 \end_layout
 
 \begin_layout Subsection
-Resultados
+Resultados y análisis de resultados
+\end_layout
+
+\begin_layout Subsubsection
+Distorsión armónica
 \end_layout
 
 \begin_layout Standard
 Se implementó el circuito y se calibró hasta obtener una salida senoidal
  con un THD lo más bajo posible.
- Se midió a varias frecuencias, cuya salida se mues y se la comparó con
+ Se midió a varias frecuencias, cuyos resultados se muestran a continuación:
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename imagenesvco/1k.png
+	lyxscale 40
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Salida con la frecuencia mínima pedida, 1kHz (Verde = circuito implementado;
+ Rosa = senoidal patrón a 1kHz).
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename imagenesvco/5k.png
+	lyxscale 40
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Salida de 5.8kHz.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename imagenesvco/8k.png
+	lyxscale 40
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Salida de 8.1kHz.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se puede observar que la senoidal se logró bastante fiel a la muestra patrón,
+ producida por el generador de funciones.
+ Sin embargo, para constatar la distorsión armónica se midió en el analizador
+ de espectros, obteniendo los siguientes resultados:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename imagenesvco/thdplot.jpeg
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Espectro de la señal obtenida a 10kHz.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename imagenesvco/thd.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Armónicos de la señal a 10kHz, tras haber sido calibrada.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En el espectro se puede observar que el segundo armónico, es decir, el siguiente
+ después del fundamental es comparable con el mismo, sin embargo, una medición
+ más minuciosa indica un THD del 0.435%.
+ Comparando esta medición con la THD ocasionada por el generador de funciones
+ Agilent 33220 que resulta de 0.04%, según el manual, y siendo éste un generador
+ de gran calidad, nuestra distorsión armónica resulta aceptable.
+\end_layout
+
+\begin_layout Subsubsection
+Jitter
+\end_layout
+
+\begin_layout Standard
+Hasta ahora, todas las mediciones fueron estáticas, no se observaron en
+ el tiempo, es decir, no se muestra ningún aspecto dinámico del sistema.
+ En esta sección, se hará énfasis en el jitter, que es considerado en los
+ osciladores como una señal de ruido no deseada.
+ Este es una desviación en la exactitud de la frecuencia, dicho de otra
+ forma, un oscilador con jitter del 0%, oscila a frecuencia constante e
+ invariante.
+\end_layout
+
+\begin_layout Standard
+A simple vista, dadas las ecuaciones, parecería ser que el jitter del circuito
+ propuesto estará relacionado linealmente con el ruido de la tensión de
+ entrada.
+\end_layout
+
+\begin_layout Standard
+Se realizaron mediciones con el osciloscopio a varias frecuencias del desvío
+ estándar y se calculó el jitter, observando muestras de alrededor de 30.000
+ mediciones.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Frecuencia de salida [Hz]
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Desvío estándar [Hz]
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+jitter
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1k
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $2.25x10^{-3}\,\%$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.6k
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.61
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.01x10^{-3}\,\%$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.8k
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+13.5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $2.33x10^{-3}\,\%$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8.2k
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+11.2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.36x10^{-3}\,\%$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10k
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+18.7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $1.87x10^{-3}\,\%$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Frecuencia medida y su respectivo jitter.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Hay algunas maneras para reducir al mínimo el jitter en este circuito.
+ En primer lugar, colocando capacitores de desacople.
+ Ésta ayuda para reducir el jitter se evidencia en las ecuaciones del schmitt
+ trigger, ya que al quitar ruido de la alimentación se tiene menos inestabilidad
+ en los valores de tensiones umbrales 
+\begin_inset Formula $V_{HIGH}$
+\end_inset
+
+ y 
+\begin_inset Formula $V_{LOW}$
+\end_inset
+
+, lo que deviene en más precisión en la frecuencia de salida (recordando
+ la ecuación (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:vcoequation"
+
+\end_inset
+
+) característica del VCO).
+\end_layout
+
+\begin_layout Standard
+Además, otro elemento que puede interferir en el jitter es la estabilidad
+ de la tensión de alimentación.
+ Él análisis es análogo para el caso de los capacitores de desacople, observando
+ la relación entre las tensiones de alimentación, las umbrales, y la frecuencia
+ de oscilación.
+\end_layout
+
+\begin_layout Standard
+En conclusión, se siguió la primera recomendación; en cuanto a la segunda,
+ la inestabilidad en la tensión de alimentación es inevitable, a menos que
+ se coloque, por ejemplo, un pasabajos.
+\end_layout
+
+\begin_layout Subsection
+Análisis de sensibilidades 
+\end_layout
+
+\begin_layout Standard
+Se puede hacer un breve análisis de sensibilidades respecto a los valores
+ de componentes elegidos, es decir R y C.
+\end_layout
+
+\begin_layout Standard
+Definiendo la sensibilidad relativa como:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\sideset{}{_{X}^{f_{0}}}S=\frac{\partial f_{0}}{\partial X}.\frac{X}{f_{0}(X)}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Se llega a que la misma es constante e igual a 
+\begin_inset Formula $\sideset{}{_{X}^{f_{0}}}S=-1$
+\end_inset
+
+ tanto para R como para C, es decir, no depende realmente de las tolerancias
+ de los componentes elegidos.
  
 \end_layout
 
 \begin_layout Subsection
-Análisis de sensibilidades
+Conclusiones
+\end_layout
+
+\begin_layout Standard
+Se logró realizar satisfactoriamente el oscilador controlado por tensión
+ con tensiones de entrada entre 0V y 5V, con frecuencias entre 1kHz y 10kHz.
+ Si bien en principio el circuito no oscilaba a los 0V, se agregó una etapa
+ de cambio de rango operacional para evitar este inconveniente y lograr
+ una entrada en el rango pedido.
+ El circuito realizado fue sencillo de implementar y de fácil calibración
+ ya que está bien modulado, y separado en etapas bien definidas, es decir,
+ cada etapa se encarga de una función específica.
+ 
+\end_layout
+
+\begin_layout Standard
+Se logró un THD aceptable, si bien poco comparable con uno ocasionado por
+ un generador de funciones, pero por debajo del 0.5%.
+ Además, se investigaron maneras de reducir el jitter, colocando capacitores
+ de desacople
 \end_layout
 
 \end_body
