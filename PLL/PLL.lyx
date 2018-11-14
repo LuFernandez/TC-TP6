@@ -375,7 +375,7 @@ Otro tipo de comparador de fase se puede implementar mediante el siguiente
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
@@ -760,7 +760,7 @@ Así, y teniendo en cuenta que
 
  es la transferencia de un pasa bajos que no presenta un cero en el origen,
  se llega a que 
-\begin_inset Formula $lím_{t\rightarrow\infty}\phi_{VCO}(t)\thickapprox\phi_{in}(t)$
+\begin_inset Formula $lím_{t\rightarrow\infty}\phi_{VCO}(t)=\phi_{in}(t)$
 \end_inset
 
 .
@@ -815,7 +815,7 @@ El lazo del PLL se diseña con un filtro pasa bajos luego del comparador
 \begin_layout Standard
 Por otro lado, si en cambio se utiliza un filtro RC luego del comparador
  de fase, se obtiene que 
-\begin_inset Formula $F(s)=\frac{1}{\frac{s}{w_{p}+1}}$
+\begin_inset Formula $F(s)=\frac{1}{\frac{s}{w_{p}}+1}$
 \end_inset
 
  con 
@@ -834,6 +834,18 @@ Por otro lado, si en cambio se utiliza un filtro RC luego del comparador
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+La transferencia resulta en 
+\begin_inset Formula $H(s)=\frac{1}{K_{VCO}}.\frac{1}{\frac{s^{2}}{w_{p}^{2}}+\frac{s}{w_{p}.Q}+1}$
+\end_inset
+
+, con 
+\begin_inset Formula $Q=\frac{K_{VCO.}K_{\phi}}{w_{p}}$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -899,6 +911,143 @@ En cuanto al ancho de banda del filtro, este determina el rango de captura
 \end_layout
 
 \begin_layout Subsection
+Aplicaciones - Demodulación de FM - Síntesis de Frecuencia
+\end_layout
+
+\begin_layout Standard
+El PLL presenta múltiples usos en la electrónica.
+ De hecho, al sincronizar dos señales dentro de un rango es una herramienta
+ crucial para las comunicaciones.
+ A continuación se presentarán dos de las numerosas aplicaciones del PLL,
+ las cuales son la demodulación de FM y la multiplicación de Frecuencia.
+\end_layout
+
+\begin_layout Subsubsection
+Demodulación de FM
+\end_layout
+
+\begin_layout Standard
+Antes de hablar sobre como se puede utilizar un PLL para demodular FM es
+ importante repasar la modulación.
+ La modulación en frecuencia (FM) es útil para transmitir señales de bajas
+ frecuencias, representando a la misma mediante una señal de alta frecuencia
+ (la cual presenta un máximo alcance en términos de las comunicaciones).
+ Esto se realiza representando cada nivel de tensión de la señal de baja
+ frecuencia (también llamada 
+\begin_inset Quotes eld
+\end_inset
+
+señal moduladora
+\begin_inset Quotes erd
+\end_inset
+
+ mediante una frecuencia (más alta) que resultará en la señal de FM.
+ Entonces, la señal de FM es una señal de frecuencia variable en el tiempo,
+ que se puede especificar mediante dos frecuencias: frecuencia 
+\begin_inset Quotes eld
+\end_inset
+
+portadora
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $("f_{portadora}")$
+\end_inset
+
+ y frecuencia de 
+\begin_inset Quotes eld
+\end_inset
+
+desvío
+\begin_inset Quotes erd
+\end_inset
+
+ 
+\begin_inset Formula $("f_{desvío}")$
+\end_inset
+
+.
+ Estas representan el rango de frecuencias desde 
+\begin_inset Formula $f_{portadora}$
+\end_inset
+
+ hasta 
+\begin_inset Formula $f_{portadora}+f_{desvío}$
+\end_inset
+
+ que será barrido por la señal de FM y además, como ya se ha mencionado,
+ cada frecuencia se corresponde a los niveles de tensión de la señal moduladora
+ (de la señal original).
+\end_layout
+
+\begin_layout Standard
+Dicho esto, se puede llegar a la conclusión de que se puede modular mediante
+ FM con un VCO ya que genera una señal de una frecuencia dada por la tensión
+ de entrada.
+ Luego, al ingresar al PLL una señal de FM, la salida del VCO tratará de
+ 
+\begin_inset Quotes eld
+\end_inset
+
+seguirla
+\begin_inset Quotes erd
+\end_inset
+
+, es decir, si las frecuencias barridas por la señal de FM se encuentran
+ dentro del rango de enganche especificado por el PLL, entonces la salida
+ del VCO que compone el lazo será la misma FM de entrada.
+ Al forzarse esta condición, inevitablemente se tendrá la señal de FM demodulada
+ en el borne de entrada del VCO.
+\end_layout
+
+\begin_layout Subsubsection
+Multiplicación de Frecuencia
+\end_layout
+
+\begin_layout Standard
+Para poder multiplicar frecuencia con el PLL se debe incorporar entre la
+ salida del VCO y la entrada al comparador de fase un divisor de módulo
+ 
+\begin_inset Quotes eld
+\end_inset
+
+N
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Esto provocará que la frecuencia de carrera libre ingrese al comparador
+ dividida por N.
+ Entonces, esto provocará que el rango de enganche y de captura sean divididos
+ también por N.
+ De esta manera, al imponer una señal de referencia de cierta frecuencia
+ a la entrada del comparador, (que se encuentre en el nuevo rango de enganche)
+ la salida del VCO deberá ser inevitablemente una señal de frecuencia N
+ veces mayor a la de referencia debido a la condición que impone el PLL
+ de que 
+\begin_inset Formula $f_{in}=f_{o}$
+\end_inset
+
+ y el hecho de que 
+\begin_inset Formula $f_{o}=\frac{f_{VCO}}{N}\Rightarrow f_{VCO}=N.f_{o}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Una aplicación de esta multiplicación de frecuencia es el aumento de frecuencia
+ de los cristales de cuarzo para la electrónica digital.
+ Generalmente, es deseable utilizar estos cristales debido a su estabilidad
+ y precisión pero la frecuencia que se puede generar mediante estos es insuficie
+nte para las demandas de la tecnología.
+ Por ende, estos cristales se utilizan como una señal de referencia para
+ un PLL, el cual multiplica la frecuencia y llega a cumplir las necesidades
+ de tiempo de los circuitos (generalmente clocks).
+\end_layout
+
+\begin_layout Subsection
 Implementación con CD4046
 \end_layout
 
@@ -924,7 +1073,7 @@ CD4046
 \begin_inset Float figure
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
@@ -988,7 +1137,7 @@ sigue
 
 \begin_layout Standard
 Dicho esto, se propone realizar un PLL con un rango de enganche entre 
-\begin_inset Formula $7.5KHz$
+\begin_inset Formula $7KHz$
 \end_inset
 
  y 
@@ -1011,107 +1160,69 @@ R3=250K\Omega & R4=50K\Omega
 
 \end_layout
 
+\begin_layout Standard
+Con estos valores, se obtuvo una frecuencia de carrera libre de 
+\begin_inset Formula $65KHz$
+\end_inset
+
+ y un rango de captura de 
+\begin_inset Formula $60KHz$
+\end_inset
+
+ a 
+\begin_inset Formula $70KHz$
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Subsection
-Mediciones
+Mediciones y Análisis de Resultados
+\end_layout
+
+\begin_layout Subsubsection
+Barrido en Frecuencia de 
+\begin_inset Formula $f_{in}$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Al momento de realizar mediciones, como primera medida se procedió a medir
- de forma directa la respuesta en frecuencia del circuito, es decir PONER
- LA TRANSFERENCIAAAAA, y además se midió su respuesta al escalón.
- Esto se repitió para los tres tipos de filtros (sin filtro, RC, RRC) y
- se obtuvo lo siguiente:
+Para exhibir el rango de enganche y de captura del PLL se procedió a realizar
+ un sweep lineal de frecuencia desde 
+\begin_inset Formula $7KHz$
+\end_inset
+
+ hasta 
+\begin_inset Formula $100KHz$
+\end_inset
+
+ con un sweep time de 
+\begin_inset Formula $100ms$
+\end_inset
+
+ y se midió la tensión de entrada al VCO.
+ Para esto se utilizó la configuración con el comparador I y el filtro RC.
+ A continuación se muestra una captura de la pantalla del osciloscopio en
+ donde se muestran dos barridos seguidos.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status collapsed
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Respuesta en Frecuencia y Respuesta al Escalón - sin Filtro
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
+\align center
+\begin_inset Graphics
+	filename mediciones/rtaVCOinSWEEP.png
+	scale 50
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Respuesta en Frecuencia y Respuesta al Escalón - con RC
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Respuesta en Frecuencia y Respuesta al Escalón - con RRC
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Para exhibir el rango de captura y de enganche del PLL se procedió a HABLAR
- DE COMO SE PONEN LOS GENERADORES Y TODO ESOOOOO
-\end_layout
-
-\begin_layout Standard
-Los resultados se presentan a continuación:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -1119,7 +1230,7 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Mediciones Rango de Enganche y Captura
+Sweep de Frecuencia - Rango de Captura y Enganche
 \end_layout
 
 \end_inset
@@ -1137,23 +1248,131 @@ Mediciones Rango de Enganche y Captura
 \end_layout
 
 \begin_layout Standard
-Además, se verificó la demodulación de FM ingresando al PLL con una DECIR
- LAS CARACTERISTICAS DE LA SEÑAL Y DECIR EL FILTRO QUE SE USÓ.
+En la imagen tomada del osciloscopio se puede notar que la frecuencia 
+\begin_inset Formula $f_{o}$
+\end_inset
+
+ comienza desenganchada y es igual a la de carrera libre ya que la tensión
+ que regula el VCO es constante (al principio).
+ Luego, al continuarse el barrido en frecuencia se pueden notar algunos
+ cambios de tensión en forma de rampa a la entrada del VCO.
+ La rampa más notable en un sweep, la cual dura más tiempo y llega a tomar
+ un nivel de tensión más elevado que las demás, se corresponde con las frecuenci
+as desde 
+\begin_inset Formula $60KHz$
+\end_inset
+
+ a 
+\begin_inset Formula $100KHz$
+\end_inset
+
+ (barridas en 
+\begin_inset Formula $40ms$
+\end_inset
+
+ como lo muestra la medición mediante cursores en 
+\begin_inset Quotes eld
+\end_inset
+
+X
+\begin_inset Quotes erd
+\end_inset
+
+ del osciloscopio) y esto significa que el PLL logró la la captura a 
+\begin_inset Formula $60KHz$
+\end_inset
+
+ y continuó enganchado hasta 
+\begin_inset Formula $100KHz$
+\end_inset
+
+.
+ Luego se comenzó nuevamente el barrido y el salto de 
+\begin_inset Formula $100KHz$
+\end_inset
+
+ a 
+\begin_inset Formula $7KHz$
+\end_inset
+
+ provocó un 
+\begin_inset Quotes eld
+\end_inset
+
+desenganche
+\begin_inset Quotes erd
+\end_inset
+
+ puesto en evidencia por la caida de la rampa.
 \end_layout
 
 \begin_layout Standard
-A continuación se expone una imagen tomada del osciloscopio que presenta
- a la señal modulada y su correspondiente demodulada tomada a la entrada
- del VCO:
+Además de la rampa mencionada, se pueden notar otras menos significativas,
+ pero que se producen en un rango que no corresponde a las frecuencias de
+ captura.
+ Estas rampas también indican que el PLL logró 
+\begin_inset Quotes eld
+\end_inset
+
+engarcharse
+\begin_inset Quotes erd
+\end_inset
+
+ y así se podría llegar a la falsa conclusión de que el PLL presenta varios
+ rangos de captura dentro del rango de enganche.
+ Sin embargo, esto no es así, las rampas de tensión en el rango no esperado
+ se pueden explicar debido a que el sweep realizado con el generador de
+ funciones aporta armónicos para cada frecuencia generada y al realizar
+ cada salto de las mismas.
+ Luego, en algunos saltos de frecuencias ocurridos mediante el barrido se
+ aportan armónicos correspondientes a las frecuencias del rango de captura
+ del PLL y estos son lo suficientemente significativos para provocar la
+ captura, pero luego de continuar el barrido estos armónicos se pueden ver
+ atenuados y , más aún, pueden aparecer otros que no pertencen al rango
+ de enganche) lo cual explica el posterior desenganche.
+ Esto también explica porque al pasar de 
+\begin_inset Formula $100KHz$
+\end_inset
+
+ a 
+\begin_inset Formula $7KHz$
+\end_inset
+
+ (dos frecuencias pertenecientes al rango de enganche).
+\end_layout
+
+\begin_layout Subsubsection
+Respuesta al Escalón
+\end_layout
+
+\begin_layout Standard
+Utilizando el filtro RC y el comparador de tipo I se realizó un salto en
+ frecuencia desde 
+\begin_inset Formula $60KHz$
+\end_inset
+
+ a 
+\begin_inset Formula $70KHz$
+\end_inset
+
+ y se midió la respuesta transitoria de la entrada del VCO.
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status collapsed
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename mediciones/transitorioCambioFreq.png
+	scale 50
+
+\end_inset
+
 
 \end_layout
 
@@ -1161,38 +1380,126 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
+Respuesta al Salto de Frecuencia
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+De la medición de los cursores del osciloscopio se puede observar un tiempo
+ de establecimiento de 
+\begin_inset Formula $1.5ms$
+\end_inset
+
+ para un error del 2%.
+ Este es el tiempo para el cual el lazo logra corregir la frecuencia de
+ la señal de salida del VCO y poder igualarla a la frecuencia de referencia.
+\end_layout
+
+\begin_layout Standard
+Es decir que la expresión lograda mediante el teorema del valor final 
+\begin_inset Formula $lím_{t\rightarrow\infty}\phi_{VCO}(t)=\phi_{in}(t)$
+\end_inset
+
+ puede traducirse a que si 
+\begin_inset Formula $t=1.5ms\Rightarrow\phi_{VCO}\thickapprox\phi_{in}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+En cuanto al 
+\begin_inset Quotes eld
+\end_inset
+
+overshoot
+\begin_inset Quotes erd
+\end_inset
+
+, con este se pudo calcular un Q de aproximadamente 0.8 mediante la expresión
+ de 
+\begin_inset Formula $\xi=\frac{-ln(OS\%/100)}{\sqrt{\pi^{2}+ln^{2}(OS\%/100)}}$
+\end_inset
+
+, teniendo en cuenta que 
+\begin_inset Formula $Q=\frac{1}{2.\xi}$
+\end_inset
+
+ y que 
+\begin_inset Formula $OS\%=\frac{Vmáx-Vmín}{Vmáx}.100$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
 Demodulación de FM
 \end_layout
 
+\begin_layout Standard
+Para verificar la demodulación de FM se ingresó al PLL con una señal cuadrada
+ de FM de tal manera que la frecuencia de la señal portadora sea de 
+\begin_inset Formula $60KHz$
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
+ y tenga un desvío de 
+\begin_inset Formula $10KHz$
 \end_inset
 
-
+ y se midió la entrada del VCO mediante el pin de demodulación de FM del
+ CD4046.
+ En cuanto a la frecuencia de la señal portadora y el desvío elegido, se
+ tuvo en cuenta que se mantengan las frecuencias en el rango de captura
+ para evitar que algún armónico aportado por el generador desenganche y
+ permanentemente el PLL.
 \end_layout
 
 \begin_layout Standard
-Por último, se interconectó la salida del VCO con la entrada del comparador
- de fase mediante un divisor de módulo 16 y se midió la señal generada por
- el VCO, ante una señal de entrada al PLL cuya frecuencia era de DECIR LA
- FRECUENCIAAAAA.
- La imagen obtenida del osciloscopio es la siguiente:
+A continuación se muestran las mediciones obtenidas al utilizar el filtro
+ RRC, tanto como con el comparador I (imagen de la izquierda) y con el comparado
+r II (imagen de la derecha).
+ La señal moduladora fue una cuadrada de 
+\begin_inset Formula $500Hz$
+\end_inset
+
+:
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status collapsed
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename mediciones/demodFM_C1_RRC.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename mediciones/cuadDemFM_C2_RRC.png
+	scale 40
+
+\end_inset
+
 
 \end_layout
 
@@ -1200,7 +1507,53 @@ status collapsed
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Multiplicación de Frecuencia
+Modulación de FM - con Filtro RRC
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Vale aclarar que la señal de FM es la amarilla mientras que la cuadrada
+ es la demodulada.
+\end_layout
+
+\begin_layout Standard
+En cuanto al filtro RC, se obtuvo lo siguiente (el comparador utilizado
+ fue el de tipo I y la señal moduladora fue la misma que en el caso del
+ RRC):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename mediciones/demodFM_C1_RC.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Modulación de FM - con Filtro RC
 \end_layout
 
 \end_inset
@@ -1217,12 +1570,316 @@ Multiplicación de Frecuencia
 
 \end_layout
 
-\begin_layout Subsection
-Análisis de Resultados
+\begin_layout Standard
+Por último en cuanto a mediciones de FM, se midio con el filtro RRC la señal
+ de salida del VCO a la vez que se medía la entrada al mismo.
+ Lo obtenido fue lo siguiente:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename mediciones/demVCOoutVSin.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+VCO in - VCO out
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Sobre las mediciones con el filtro RRC, se pudo medir exitosamente la demodulaci
+ón de la señal cuadrada, cuya frecuencia se midió de 
+\begin_inset Formula $500Hz$
+\end_inset
+
+ con los cursores del osciloscopio.
+ Como se puede notar la señal sufre un montón de riple y también se ve afectada
+ por ruido (tengase en cuenta que las imagenes se capturaron con el modo
+ ACQUIRE: NORMAL), sin embargo se puede notar claramente la forma cuadrada.
+\end_layout
+
+\begin_layout Standard
+Al utilizar el filtro RC, en cambio, la señal cuadrada se ve relativamente
+ mucho más deformada que la medida con el filtro RRC.
+ Esto se debe a que el régimen transitorio en el caso del filtro RC toma
+ un rol más significativo.
+ De echo, se puede notar claramente subamortiguado que no llega a establecerse
+ antes de que se cambie la frecuencia.
+ Esto significa que el PLL con el filtro RC no pudo 
+\begin_inset Quotes eld
+\end_inset
+
+seguir
+\begin_inset Quotes erd
+\end_inset
+
+ a la FM modulada por la cuadrada de 
+\begin_inset Formula $500Hz$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Por último, la medición de la señal de salida del VCO superpuesta con la
+ entrada muestra claramente como un nivel de tensión elevado corresponde
+ a una frecuencia elevada mientras que un nivel de tensión menor corresponde
+ a una frecuencia menor.
+\end_layout
+
+\begin_layout Subsubsection
+Multiplicación de Frecuencias
+\end_layout
+
+\begin_layout Standard
+Para poner en evidencia la capacidad de multiplicar frecuencias con el PLL
+ mediante la incorporación de un divisor de módulo N se utilizó un contador
+ de 4 bits (Módulo 16) y se realizaron las siguientes mediciones:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename mediciones/mul4x16.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Multiplicación - 4x16
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename mediciones/mul6x16 .png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Multiplicación - 6x16
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename mediciones/mulDesengAbajo.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Multiplicación - Debajo del 
+\begin_inset Quotes eld
+\end_inset
+
+Enganche
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename mediciones/mulDesengArriba.png
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Multiplicación - Arriba del 
+\begin_inset Quotes eld
+\end_inset
+
+Enganche
+\begin_inset Quotes erd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+De estas mediciones se puede notar claramente como se logra multiplicar
+ la frecuencia de referencia (amarilla) en la salida del VCO (verde), pero
+ solo cuando 
+\begin_inset Formula $f_{in}x16$
+\end_inset
+
+ se encuentra en el rango de enganche.
+\end_layout
+
+\begin_layout Standard
+De hecho, en las últimas dos mediciones se ingreso una señal con 
+\begin_inset Formula $f_{in}$
+\end_inset
+
+ por debajo y por arriba del rango de enganche, y en ambos casos se obtuvo
+ que la salida del VCO era una señal con la frecuencia de carrera libre.
 \end_layout
 
 \begin_layout Subsection
 Conclusión
+\end_layout
+
+\begin_layout Standard
+Como conclusión del artículo se puede afirmar que el análisis de Laplace
+ (o Fourier) para el sistema del 
+\begin_inset Quotes eld
+\end_inset
+
+Phase Locked Loop
+\begin_inset Quotes erd
+\end_inset
+
+, idealizado como un sistema lineal, se corresponde aproximadamente con
+ los resultados prácticos, ya que se pudo implementar el PLL con el integrado
+ CD4046 y a partir de las mediciones se obtuvieron los resultados que predijo
+ la teoría.
+ Sin embargo, existen en la práctica algunas limitaciones que rompen la
+ linealidad, como por ejemplo los armónicos que aporta la señal de entrada
+ a la hora de realizar mediciones.
+\end_layout
+
+\begin_layout Standard
+En cuanto a la respuesta transitoria, es importante regular el subamortiguamient
+o con los distintos tipos de filtros y los valores de los componentes que
+ lo conforman para lograr un relación óptima entre el tiempo de establecimiento
+ de la respuesta y el overshoot de la misma según la aplicación del PLL.
+\end_layout
+
+\begin_layout Standard
+Finalmente, la experiencia de la implementación del PLL y además la utilización
+ del mismo para demodular FM y multiplicar frecuencia dan cuenta de la importanc
+ia de los PLLs en la electrónica y en el avance (ya sea directamente o indirecta
+mente) de la tecnología.
 \end_layout
 
 \end_body

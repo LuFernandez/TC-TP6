@@ -1363,7 +1363,7 @@ Utilizando el filtro RC y el comparador de tipo I se realizó un salto en
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
@@ -1429,8 +1429,7 @@ overshoot
 \begin_inset Quotes erd
 \end_inset
 
-, con este se pudo calcular un Q de aproximadamente 0.8 mediante la expresión
- de 
+, con este se pudo calcular un Q de ASDASD mediante la expresión de 
 \begin_inset Formula $\xi=\frac{-ln(OS\%/100)}{\sqrt{\pi^{2}+ln^{2}(OS\%/100)}}$
 \end_inset
 
@@ -1578,7 +1577,6 @@ Por último en cuanto a mediciones de FM, se midio con el filtro RRC la señal
 
 \begin_layout Standard
 \begin_inset Float figure
-placement H
 wide false
 sideways false
 status collapsed
@@ -1667,7 +1665,6 @@ Para poner en evidencia la capacidad de multiplicar frecuencias con el PLL
 
 \begin_layout Standard
 \begin_inset Float figure
-placement H
 wide false
 sideways false
 status collapsed
@@ -1706,10 +1703,9 @@ Multiplicación - 4x16
 
 \begin_layout Standard
 \begin_inset Float figure
-placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \align center
@@ -1742,7 +1738,6 @@ Multiplicación - 6x16
 \begin_layout Standard
 \align center
 \begin_inset Float figure
-placement H
 wide false
 sideways false
 status collapsed
@@ -1784,7 +1779,6 @@ Enganche
 
 \begin_layout Standard
 \begin_inset Float figure
-placement H
 wide false
 sideways false
 status collapsed
