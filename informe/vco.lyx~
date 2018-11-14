@@ -7,7 +7,7 @@
 \textclass article
 \use_default_options true
 \maintain_unincluded_children false
-\language english
+\language spanish
 \language_package default
 \inputencoding auto
 \fontencoding global
@@ -29,9 +29,10 @@
 \bibtex_command default
 \index_command default
 \paperfontsize default
+\spacing single
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
@@ -44,6 +45,7 @@
 \use_package undertilde 1
 \cite_engine basic
 \cite_engine_type default
+\biblio_style plain
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
@@ -55,13 +57,17 @@
 \shortcut idx
 \color #008000
 \end_index
+\leftmargin 19mm
+\topmargin 25mm
+\rightmargin 19mm
+\bottommargin 25mm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
 \paragraph_indentation default
 \is_math_indent 0
 \math_numbering_side default
-\quotes_style english
+\quotes_style french
 \dynamic_quotes 0
 \papercolumns 1
 \papersides 1
@@ -76,24 +82,844 @@
 \begin_body
 
 \begin_layout Section
-Oscilador Controlado por Tensión
+Oscilador Controlado por Tensión - VCO
+\end_layout
+
+\begin_layout Subsection
+Introducción teórica
 \end_layout
 
 \begin_layout Standard
-hay dos tipos de vcos:
+Un oscilador controlado por tensión es un oscilador cuya frecuencia es proporcio
+nal a la tensión de entrada.
+ Aplicaciones típicas para un VCO suelen ser generar señales moduladas en
+ frecuencia (FM) o como parte de bucles de enganche de fase, también conocidos
+ como 
+\shape italic
+phase-locked loop
+\shape default
+ (PLL).
 \end_layout
 
 \begin_layout Standard
--osciladores harmonicos: la salida es sinusoidal.Examples are crystal oscillators
- and tank oscillators.
+Hay dos tipos de osciladores controlados por tensión, dependiendo del tipo
+ de onda que producen:
+\end_layout
+
+\begin_layout Itemize
+Osciladores lineales o armónicos: generan una onda senoidal.
+ Consisten en un resonador con un amplificador para evitar las pérdidas
+ en amplitud y aislar el mismo de la salida.
+ Algunos ejemplos son osciladores de cristal o LC, cuya capacitancia es
+ en realidad variable con la tensión, como un diodo varactor.
+\end_layout
+
+\begin_layout Itemize
+Osciladores de relajación: generan una onda triangular o cuadrada.
+ Son circuitos no lineales, porque utilizan comparadores, transistores o
+ diodos que conmutan para obtener la salida deseada.
 \end_layout
 
 \begin_layout Standard
--Relaxation Oscillators: The output is a signal with saw tooth or triangular
- waveform and provides a wide range of operational frequencies.
- The output frequency depends on the time of charging and discharging of
- the capacitor.
+Entonces, existen varias implementaciones para un 
+\shape italic
+VCO.
  
+\shape default
+En este artículo se enfocará en el segundo, ya que será el implementado.
+ En breves palabras, se basa en la carga y descarga de un capacitor, donde
+ las mismas dependen de un umbral y una constante de tiempo.
+\end_layout
+
+\begin_layout Subsection
+Análisis teórico y analítico del circuito
+\end_layout
+
+\begin_layout Standard
+El circuito a implementar era un oscilador controlado por tensión tal que
+ una entrada entre 0V y 5V regulara frecuencias entre 1kHz y 10kHz, generando
+ una senoidal de 
+\begin_inset Formula $1V_{pp}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Como se mencionó, al ser un circuito no lineal, la implementación se explicará
+ paso a paso y se puede dividir en partes; por un lado, la generación de
+ onda triangular, y su posterior conversión a onda senoidal.
+\end_layout
+
+\begin_layout Subsubsection
+Generación de onda triangular
+\end_layout
+
+\begin_layout Standard
+En principio, supongamos que lo que se quiere diseñar es un generador de
+ onda triangular y/o cuadrada.
+ Para esto se necesita un comparador, y un circuito que cargue y descargue
+ un capacitor, la carga y descarga delimitadas por el elemento comparador.
+ Por lo visto en la materia, el mismo puede ser implementado por un 
+\shape italic
+Schmitt trigger.
+
+\shape default
+ Éste se muestra a continuación:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename imagenesvco/trigger.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Schmitt trigger inversor utilizado.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Como ya se sabe, la salida tiene dos estados estables, de lo que resultan
+ los valores de los umbrales:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+V_{HIGH}=\frac{R_{1}}{R_{1}+R_{2}}V_{CC}\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,V_{LOW}=\frac{R_{1}}{R_{1}+R_{2}}V_{EE}\label{eq:umbralestrigger}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+donde 
+\begin_inset Formula $V_{HIGH}$
+\end_inset
+
+ y 
+\begin_inset Formula $V_{LOW}$
+\end_inset
+
+ son las tensiones de umbral, 
+\begin_inset Formula $V_{CC}$
+\end_inset
+
+ y 
+\begin_inset Formula $V_{EE}$
+\end_inset
+
+ son las alimentaciones positivas y negativas, respectivamente, del operacional.
+ Con ésto se puede ver que a la salida de este circuito se encontrará la
+ señal cuadrada.
+\end_layout
+
+\begin_layout Standard
+Además de este bloque se había mencionado que se requiere otro que cargue
+ y descargue un capacitor, para formar la onda triangular y disparar el
+ 'schmitt trigger'.
+ Para ésto, se presenta el circuito siguiente: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename imagenesvco/triangular.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Circuito de carga y descarga del capacitor.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+A simple vista se puede observar un integrador junto al Schmitt trigger
+ inversor presentado previamente.
+ En principio, debido a la inversión introducida por el operacional U2,
+ U1 debe tener una configuración no inversora pues si no el sistema sería
+ inestable.
+\end_layout
+
+\begin_layout Standard
+Además, para asegurar que el capacitor cargue y descargue se debe alternar
+ entre polaridades opuestas; ésto último está controlado por el transistor
+ BJT.
+ A su vez, como ya se mencionó, el operacional U1 que actúa como parte del
+ disparador Schmitt tiene los umbrales de tensión ya mencionados en la ecuación
+ (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:umbralestrigger"
+
+\end_inset
+
+).
+ El circuito opera de la siguiente forma.
+\end_layout
+
+\begin_layout Standard
+La tensión en ambas entradas del operacional U2, es decir en las terminales
+ del mismo, 
+\begin_inset Formula $V^{+}$
+\end_inset
+
+ y 
+\begin_inset Formula $V^{-}$
+\end_inset
+
+, es 
+\begin_inset Formula $V_{in}/2$
+\end_inset
+
+, por efecto del divisor resistivo a la entrada del op-amp.
+ Si se asume que el schmitt trigger está en estado bajo, el transistor se
+ encuentra en estado de corte por lo que no circulará corriente por el mismo.
+ Con ésto en mente, y asumiendo que el capacitor no está cargado, la corriente
+ que circulará por él será:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+I=\frac{V_{in}-\frac{V_{in}}{2}}{R}=\frac{V_{in}}{2R}\label{eq:corrientevco}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Luego, la tensión en la salida del operacional U2, o lo que es lo mismo,
+ a la salida señalada como triangular en la figura superior, decaerá rápidamente.
+ Cuando esta alcance el valor umbral 
+\begin_inset Formula $V_{LOW}$
+\end_inset
+
+, el disparador schmitt saltará ocasionando que la salida alcance, eventualmente
+, el estado alto, es decir, 
+\begin_inset Formula $V_{HIGH}$
+\end_inset
+
+.
+ Con una tensión alta el transistor entrará en modo de saturación, actuando
+ con muy baja impedancia, por lo tanto, la nueva corriente sobre el capacitor
+ será:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+I=\frac{V_{in}}{2R}-\frac{\frac{V_{in}}{2}}{0.5R}=-\frac{V_{in}}{2R}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Obteniendo una corriente del mismo módulo y sentido opuesto, lo que resulta
+ en que se descargue de igual forma en que se carga.
+ En consecuencia, la tensión a la salida triangular se elevará rápidamente.
+ Tan pronto como la tensión a la salida alcance 
+\begin_inset Formula $V_{HIGH}$
+\end_inset
+
+, el trigger se activará nuevamente, lo cual dedesactiva al transistor,
+ reestableciendo las condiciones del medio ciclo previo, y consecuentemente,
+ logrando una oscilación en el circuito.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newline
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Para calcular los valores de R y C, se sabe que la relación entre la frecuencia
+ de oscilación y la tensión de entrada es lineal, entonces se tiene:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+V_{in}=af+b
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Por otro lado, se vio que la señal triangular está a la salida del capacitor
+ de realimentación del primer operacional (U2), se parte de:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+V_{C}=\frac{1}{C}\int i(t)dt
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dado que la corriente 
+\begin_inset Formula $i(t)$
+\end_inset
+
+ es constante durante la carga y la descarga, si se toma medio ciclo, se
+ tiene: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+V_{C}=\frac{1}{C}I\frac{\tau}{2}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+con 
+\begin_inset Formula $\tau$
+\end_inset
+
+ el período de la señal.
+ Como se vio en la ecuación (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:corrientevco"
+
+\end_inset
+
+), si se reemplaza entonces 
+\begin_inset Formula $I$
+\end_inset
+
+ por tal, y sabiendo que 
+\begin_inset Formula $V_{C}$
+\end_inset
+
+ varía entre los umbrales de tensión 
+\begin_inset Formula $V_{HIGH}$
+\end_inset
+
+ y 
+\begin_inset Formula $V_{LOW}$
+\end_inset
+
+, es decir la tensión en el capacitor es la diferencia entre ambas.
+ De todo esto resulta:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+V_{HIGH}-V_{LOW}=\frac{\tau V_{in}}{4RC}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+y si se reemplaza 
+\begin_inset Formula $\tau=\frac{1}{f_{0}}$
+\end_inset
+
+, se obtiene la ecuación característica del VCO,
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+f_{0}=\frac{V_{in}}{4RC(V_{HIGH}-V_{LOW})}\label{eq:vcoequation}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+o bien;
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\begin{equation}
+V_{in}=4RC(V_{HIGH}-V_{LOW})f_{0}+b
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Generación de onda senoidal
+\end_layout
+
+\begin_layout Standard
+Una vez obtenida la salida triangular, es requisito transformarla en senoidal.
+ Un circuito para lograr este cometido se propone a continuación: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename imagenesvco/senoidal.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Circuito de transformación de onda triangular a senoidal.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+La idea de este circuito es que la señal entre al par diferencial, aprovechando
+ la zona de comportamiento no lineal de los mismos.
+ Esto es, cerca de los puntos en los que la entrada cruza por cero, la ganancia
+ del par es casi lineal; sin embargo, mientras la señal se aproxima a cada
+ pico (refiriéndose a la entrada triangular), uno de los BJT se acerca al
+ borde del corte, donde su ganancia de tensión se vuelve logarítmica, produciend
+o un 'soft clipping' de la onda triangular; manteniendo la curva cercana
+ al cruce por el valor medio, que en la senoidal y en la triangular son
+ iguales.
+ Luego la salida del diferencial es tomada por un operacional, lo que resulta
+ en la señal senoidal.
+\end_layout
+
+\begin_layout Standard
+Entonces, en el circuito presentado, R2 y R3 son utilizadas para la correcta
+ polarización de los transistores, por lo que sus valores resultan de 
+\begin_inset Formula $4.7k\varOmega$
+\end_inset
+
+.
+ De igual manera, se elige R1 de 
+\begin_inset Formula $390\varOmega$
+\end_inset
+
+.
+ Dado que los BJT son discretos, es decir diferentes entre sí, R4 resulta
+ en un preset con el cual se regula la 
+\begin_inset Formula $I_{CQ_{2,3}}$
+\end_inset
+
+, que es la corriente de trabajo de los transistores, tal que sean lo más
+ parecidas posibles.
+\end_layout
+
+\begin_layout Subsubsection
+Regulación de tensión de entrada
+\end_layout
+
+\begin_layout Standard
+Recordando las secciones anteriores, el circuito a implementar es un oscilador
+ controlado por tensión tal que una entrada entre 0V y 5V corresponda a
+ frecuencias entre 1kHz y 10kHz; sin embargo, al observar la ecuación caracterís
+tica (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:vcoequation"
+
+\end_inset
+
+) se observa que para un tensión de 0V, la frecuencia equivale a 0Hz, por
+ lo que el circuito no oscilaría.
+ Esto se puede remediar colocando una primera etapa que realice un cambio
+ de rango operacional, es decir una transformación lineal, de manera tal
+ que 0V a la entrada del circuito corresponda a 0.5V, y los 5V de entrada
+ a 8V para el circuito generador de onda triangular.
+\end_layout
+
+\begin_layout Standard
+Así, se deberá resolver el siguiente sistema de ecuaciones:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\begin{cases}
+\begin{array}{c}
+0.5=m.5+b\\
+8=m.0+b
+\end{array}\end{cases}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Que tiene como solución 
+\begin_inset Formula $m=1.5\,\,\,\cap\,\,\,b=0.5$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Para realizar la transformación lineal se resolvió utilizar el siguiente
+ circuito:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename imagenesvco/lineal.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Cambio de rango operacional en circuito.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+El mismo se puede resolver por superposición, pasivando 
+\begin_inset Formula $-Vcc$
+\end_inset
+
+ y seguidamente 
+\begin_inset Formula $V_{in}$
+\end_inset
+
+.
+ Resultando en la siguiente tensión de salida:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+V_{out}=\left(1+\frac{R2(R1+R3)}{R1R3}\right)V_{in}+\frac{R2}{R1}|Vcc|
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Entonces para cumplir tanto con 
+\begin_inset Formula $y=mx+b$
+\end_inset
+
+ como con la solución del sistema de ecuaciones mencionado anteriormente:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\begin{cases}
+\begin{array}{c}
+m=1+\frac{R2(R1+R3)}{R1R3}\\
+b=\frac{R2}{R1}|Vcc|
+\end{array}\end{cases}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Elección de Componentes e Implementación del circuito
+\end_layout
+
+\begin_layout Standard
+De la primera etapa, es decir del cambio de rango operacional, teniendo
+ en cuenta que m=1.5 y b=0.5, el sistema quedaba definido por:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\begin{cases}
+\begin{array}{c}
+1.5=1+\frac{R2(R1+R3)}{R1R3}\\
+0.5=\frac{R2}{R1}|Vcc|
+\end{array}\end{cases}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+De lo que resulta:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\begin{cases}
+\begin{array}{c}
+R2=\frac{R1}{30}\\
+R3=\frac{R2R1}{0.5R1-R2}
+\end{array}\end{cases}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Y eligiendo 
+\begin_inset Formula $R1=30k\varOmega$
+\end_inset
+
+, R2 queda definida como 
+\begin_inset Formula $1k\varOmega$
+\end_inset
+
+, mientras que 
+\begin_inset Formula $R3=2140\varOmega$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Para tener un mejor manejo de esta transformación se implementaron tanto
+ R2 como R3 como presets, junto a respectivas resistencias de base en serie.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newline
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Por otro lado, para la segunda etapa, es decir para la generación de onda
+ triangular se quiere que entre el rango de 
+\begin_inset Formula $[0.5V,\,8V]$
+\end_inset
+
+ se regulen frecuencias de 1kHz a 10kHz, por lo que faltaría definir los
+ valores para R y C.
+ Teniendo la ecuación característica del VCO, dada por la ecuación (
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "eq:vcoequation"
+
+\end_inset
+
+), se puede despejar 
+\begin_inset Formula $V_{in}$
+\end_inset
+
+ como:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+V_{in}=4RC(V_{HIGH}-V_{LOW})f_{0}+b
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Agregando b como término independiente, y seteando 
+\begin_inset Formula $V_{HIGH}-V_{LOW}=7V$
+\end_inset
+
+ se obtiene el siguiente sistema:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\begin{cases}
+\begin{array}{c}
+0.5=28000RC+b\\
+8=280000RC+b
+\end{array}\end{cases}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+De donde se consigue:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{equation}
+\begin{cases}
+\begin{array}{c}
+CR\approx3x10^{-5}\varOmega F\\
+b=\frac{-1}{3}\approx0.33V
+\end{array}\end{cases}
+\end{equation}
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Y por consiguiente, si 
+\begin_inset Formula $R=10k\varOmega\implies C=3nF$
+\end_inset
+
+.
+ El offset puede ser fácilmente corregido con los presets de la etapa primera;
+ es decir, ajustando la recta, no es necesario agregarle un offset a la
+ señal.
+ Se agregó otro preset en esta etapa para regular la amplitud de la salida
+ triangular.
+\end_layout
+
+\begin_layout Standard
+Por último, para la tercera etapa, o sea, la transformación de triangular
+ a senoidal se setearon los valores resistivos de la forma en que ya se
+ explicó, definiendo de forma completa el circuito.
+\end_layout
+
+\begin_layout Subsection
+Análisis de sensibilidades
 \end_layout
 
 \end_body

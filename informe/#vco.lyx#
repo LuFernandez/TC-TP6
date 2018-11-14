@@ -925,43 +925,8 @@ Resultados
 \begin_layout Standard
 Se implementó el circuito y se calibró hasta obtener una salida senoidal
  con un THD lo más bajo posible.
- Se midió a varias frecuencias, cuyos resultados se muestran a continuación:
+ Se midió a varias frecuencias, cuya salida se mues y se la comparó con
  
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Graphics
-	filename imagenesvco/lineal.png
-	scale 60
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Cambio de rango operacional en circuito.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
