@@ -3436,10 +3436,9 @@ Conclusiones
 \begin_layout Standard
 En conclusión, se pudo implementar físicamente con éxito el oscilador de
  Wien.
- Es notable destacar las simpleza y eficiencia del sistema.
- el cual puede proporcionar una senoidal con un THD muy bajo sin muchas
- complicaciones.
- Es mas, colocando potenciómetros se puede diseñar un oscilador con una
+ Es notable destacar las simpleza y eficiencia del sistema, el cual puede
+ proporcionar una senoidal con un THD muy bajo sin muchas complicaciones.
+ Es más, colocando potenciómetros se puede diseñar un oscilador con una
  frecuencia de señal y amplitud variable, mientras esta no se de alta frecuencia
 , por las complicaciones que implican al Slew-Rate y al polo dominante de
  Op-Amp como se discutió anteriormente.
